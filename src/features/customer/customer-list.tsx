@@ -71,7 +71,7 @@ export const CustomersList = () => {
 
   const noResultComponent = (
     <div className="flex flex-col gap-8 justify-center items-center h-full">
-      <span className="font-bold text-2xl">
+      <span className="font-bold text-2xl text-center">
         {hasActiveFilters
           ? "No results found matching your filters"
           : "No results found"}
