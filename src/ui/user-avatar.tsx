@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 const COLORS = [
@@ -13,16 +13,26 @@ const COLORS = [
   "bg-orange-500",
 ] as const;
 
+const getColor = (fallback: string) => {
+  let hash = 0;
+  for (let i = 0; i < fallback.length; i++) {
+    hash = fallback.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return COLORS[Math.abs(hash) % COLORS.length];
+};
+
 type Props = {
   url?: string;
   fallback: string;
   className?: HTMLDivElement["className"];
 };
 
-export const UserAvatar = ({ url, fallback, className }: Props) => {
+export const UserAvatar = memo(({ url, fallback, className }: Props) => {
   const [error, setError] = useState(false);
 
   const showImage = !error && !!url;
+
+  const color = getColor(fallback);
 
   return (
     <div
@@ -37,13 +47,11 @@ export const UserAvatar = ({ url, fallback, className }: Props) => {
       )}
       {!showImage && (
         <div
-          className={`w-full h-full relative flex items-center justify-center ${
-            COLORS[Math.floor(Math.random() * COLORS.length)]
-          }`}
+          className={`w-full h-full relative flex items-center justify-center ${color}`}
         >
           <span className="text-white font-normal">{fallback}</span>
         </div>
       )}
     </div>
   );
-};
+});
