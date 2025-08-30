@@ -12,7 +12,7 @@ const Page = () => {
   return (
     <PageWrapper
       title="Customers"
-      titleRightAddon={
+      rightAddon={
         <span>
           ({customers.length}
           {total !== null ? `/${total}` : ""})

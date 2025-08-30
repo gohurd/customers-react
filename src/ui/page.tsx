@@ -1,18 +1,33 @@
 import type { ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
 
 type Props = {
   children: ReactNode;
   title: string;
-  titleRightAddon?: ReactNode;
+  leftAddon?: ReactNode;
+  rightAddon?: ReactNode;
+  titleClassName?: HTMLHeadingElement["className"];
 };
 
-export const Page = ({ children, title, titleRightAddon }: Props) => {
+export const Page = ({
+  children,
+  title,
+  leftAddon,
+  rightAddon,
+  titleClassName,
+}: Props) => {
   return (
     <main className="h-full w-full flex justify-center">
       <div className="h-full flex flex-col max-w-[1200px] w-full md:py-8">
-        <h1 className="text-2xl font-semibold flex justify-between">
+        <h1
+          className={twMerge(
+            "text-2xl font-semibold flex justify-between",
+            titleClassName
+          )}
+        >
+          {leftAddon}
           {title}
-          {titleRightAddon}
+          {rightAddon}
         </h1>
         {children}
       </div>
