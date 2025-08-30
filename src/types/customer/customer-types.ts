@@ -15,4 +15,15 @@ export type Customer = {
 
 export type FetchCustomersParams = {
   page: number;
+  ageFrom?: number;
+  ageTo?: number;
+  gender?: number;
+  location?: string;
+};
+
+export type CustomerFiltersState = {
+  ageFrom: number | null;
+  ageTo: number | null;
+  gender: number | null;
+  location: string | null;
 };

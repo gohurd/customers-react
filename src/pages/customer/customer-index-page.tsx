@@ -4,15 +4,22 @@ import {
   useCustomers,
 } from "../../store/customer/customers-store";
 import { CustomersList } from "../../features/customer/customer-list";
+import { CustomersFilters } from "../../features/customer/customer-filters";
 
 const Page = () => {
-  const { customers } = useCustomers();
+  const { customers, total } = useCustomers();
 
   return (
     <PageWrapper
       title="Customers"
-      titleRightAddon={<span>({customers.length})</span>}
+      titleRightAddon={
+        <span>
+          ({customers.length}
+          {total !== null ? `/${total}` : ""})
+        </span>
+      }
     >
+      <CustomersFilters />
       <CustomersList />
     </PageWrapper>
   );
