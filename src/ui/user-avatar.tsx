@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 const COLORS = [
   "bg-red-500",
@@ -15,15 +16,18 @@ const COLORS = [
 type Props = {
   url?: string;
   fallback: string;
+  className?: HTMLDivElement["className"];
 };
 
-export const UserAvatar = ({ url, fallback }: Props) => {
+export const UserAvatar = ({ url, fallback, className }: Props) => {
   const [error, setError] = useState(false);
 
   const showImage = !error && !!url;
 
   return (
-    <div className="w-10 h-10 rounded-full overflow-hidden">
+    <div
+      className={twMerge("w-10 h-10 rounded-full overflow-hidden", className)}
+    >
       {showImage && (
         <img
           src={url}
