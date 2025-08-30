@@ -18,7 +18,7 @@ export const Page = ({
 }: Props) => {
   return (
     <main className="h-full w-full flex justify-center">
-      <div className="h-full flex flex-col max-w-[1200px] w-full md:py-8">
+      <div className="h-full flex flex-col max-w-[1200px] w-full md:py-8 p-2 md:p-0">
         <h1
           className={twMerge(
             "text-2xl font-semibold flex justify-between",
