@@ -1,4 +1,4 @@
-import { useRef, type SyntheticEvent } from "react";
+import { useEffect, useRef, type SyntheticEvent } from "react";
 import { useCustomers } from "../../store/customer/customers-store";
 import { useVirtualizer, type VirtualItem } from "@tanstack/react-virtual";
 import { Link } from "react-router";
@@ -14,6 +14,7 @@ export const CustomersList = () => {
     hasActiveFilters,
     refetch,
     loading,
+    filters,
   } = useCustomers();
 
   const handleScroll = (e: SyntheticEvent) => {
@@ -27,7 +28,7 @@ export const CustomersList = () => {
     }
   };
 
-  const parentRef = useRef(null);
+  const parentRef = useRef<HTMLDivElement>(null);
 
   const rowVirtualizer = useVirtualizer({
     count: customers.length,
@@ -35,12 +36,23 @@ export const CustomersList = () => {
     estimateSize: () => 72,
   });
 
+  useEffect(() => {
+    setTimeout(
+      () =>
+        parentRef.current?.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        }),
+      100
+    );
+  }, [filters]);
+
   const renderVirtualItem = (virtualItem: VirtualItem) => {
     const customer = customers[virtualItem.index];
 
     return (
       <Link
-        to={`./${customer.email}`}
+        to={`./${customer.id}`}
         key={virtualItem.key}
         style={{
           position: "absolute",
