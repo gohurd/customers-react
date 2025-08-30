@@ -78,3 +78,13 @@ export const fetchCustomers = async ({
     total: filtered.length,
   };
 };
+
+export const fetchCustomerById = async (id: number): Promise<Customer> => {
+  const customer = customers.find((customer) => customer.id === id);
+
+  if (!customer) {
+    throw new Error("Customer not found");
+  }
+
+  return customer;
+};
