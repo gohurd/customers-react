@@ -14,7 +14,7 @@ const FILTERS = {
 type FilterValues = {
   ageFrom?: number;
   ageTo?: number;
-  gender?: number;
+  gender?: string;
   location?: string;
 };
 
