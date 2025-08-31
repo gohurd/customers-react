@@ -1,5 +1,6 @@
 import { memo, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { getFallbackColor } from "../utils/shared/get-fallback-color";
 
 const COLORS = [
   "bg-red-500",
@@ -13,14 +14,6 @@ const COLORS = [
   "bg-orange-500",
 ] as const;
 
-const getColor = (fallback: string) => {
-  let hash = 0;
-  for (let i = 0; i < fallback.length; i++) {
-    hash = fallback.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return COLORS[Math.abs(hash) % COLORS.length];
-};
-
 type Props = {
   url?: string;
   fallback: string;
@@ -32,7 +25,7 @@ export const UserAvatar = memo(({ url, fallback, className }: Props) => {
 
   const showImage = !error && !!url;
 
-  const color = getColor(fallback);
+  const color = getFallbackColor(fallback, [...COLORS]);
 
   return (
     <div
