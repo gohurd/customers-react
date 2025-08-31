@@ -5,7 +5,7 @@ type Props = {
   orders: Order[];
 };
 
-export const CustomerDetailsOrders = ({ orders }: Props) => {
+const CustomerDetailsOrders = ({ orders }: Props) => {
   return (
     <div className="md:p-0 mt-2 flex-1 flex flex-col gap-4 min-h-0">
       <h3 className="font-semibold text-lg">Order history</h3>
@@ -17,3 +17,5 @@ export const CustomerDetailsOrders = ({ orders }: Props) => {
     </div>
   );
 };
+
+export default CustomerDetailsOrders;

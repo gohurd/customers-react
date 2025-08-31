@@ -2,9 +2,13 @@ import { useNavigate, useParams } from "react-router";
 import { useCustomerDetails } from "../../store/customer/customer-details-store";
 import { Page } from "../../ui/page";
 import { CustomerDetailsCard } from "../../features/customer/customer-details-card";
-import { CustomerDetailsOrders } from "../../features/customer/customer-details-orders";
 import back from "../../../public/arrow-back.svg";
 import { IconButton } from "../../ui/icon-button";
+import { lazy } from "react";
+
+const CustomerDetailsOrders = lazy(
+  () => import("../../features/customer/customer-details-orders")
+);
 
 export const CustomerDetailsPage = () => {
   const params = useParams();
